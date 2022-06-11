@@ -55,7 +55,7 @@ impl Contract {
     pub fn burn(&mut self, account_id: AccountId, amount: U128) {
         assert_eq!(env::predecessor_account_id(), self.owner_id);
 
-        require!(amount > 0, "The amount should be a positive number");
+        require!(u128::from(amount) > 0, "The amount should be a positive number");
         self.token.internal_withdraw(&account_id, amount.into());
         self.on_tokens_burned(account_id, amount.into());
     }
