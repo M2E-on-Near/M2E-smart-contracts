@@ -1,0 +1,27 @@
+////////////////////////
+deploy
+////////////////////////
+near deploy --wasmFile res/fungible_token1.wasm --accountId krock-nft.testnet
+near deploy --wasmFile res/fungible_token2.wasm --accountId krock-nft.testnet
+near deploy --wasmFile res/non_fungible_token.wasm --accountId krock-nft.testnet
+
+owner_id - один для всех
+
+////////////////////////
+init ft1
+///////////////////////
+
+near call ftflaneartest.testnet new '{"owner_id":"krock.testnet","total_supply":"100000000000000","metadata":{"spec":"ft-1.0.0","name":"KROCK","symbol":"KRK","icon":"","decimals":8}}' --account-id ftflaneartest.testnet
+
+///////////////////////
+init ft2
+///////////////////////
+
+near call ftflaneartest.testnet new '{"owner_id":"krock.testnet","total_supply":"100000000000000","metadata":{"spec":"ft-1.0.0","name":"flaNEAR","symbol":"FLAN","icon":"","decimals":8}}' --account-id ftflaneartest.testnet
+
+//////////////////////
+init nft
+//////////////////////
+
+near call krock-nft.testnet new '{"owner_id":"krock.testnet","metadata":{"spec": "nft-1.0.0", "name": "", "symbol": ""}}' --account-id krock-nft.testnet
+
