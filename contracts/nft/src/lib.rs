@@ -7,7 +7,7 @@ use near_contract_standards::non_fungible_token::NonFungibleToken;
 use near_sdk::borsh::{self, BorshDeserialize, BorshSerialize};
 use near_sdk::collections::LazyOption;
 use near_sdk::json_types::{U64, ValidAccountId};
-use near_sdk::{env, near_bindgen, AccountId, BorshStorageKey, PanicOnDefault, Promise, PromiseOrValue, serde_json, Balance};
+use near_sdk::{env, near_bindgen, AccountId, BorshStorageKey, PanicOnDefault, Promise, PromiseOrValue, serde_json, Balance, log};
 use near_sdk::env::{panic, predecessor_account_id};
 use near_sdk::serde::{Deserialize, Serialize};
 use near_sdk::{ext_contract};
@@ -85,7 +85,6 @@ impl Contract {
 
     pub fn update_stats(&mut self, token_id: TokenId, account_id: ValidAccountId) -> Promise {
         assert_eq!(predecessor_account_id(), self.tokens.owner_id);
-
         ext_ft_transfer::ft_balance_of(
             account_id.clone().into(),
             &FT1_CONTRACT_ID,
@@ -96,7 +95,7 @@ impl Contract {
             token_id,
             &env::current_account_id(),
             0,
-            50_000_000_000_000
+            70_000_000_000_000
         ))
     }
 
@@ -154,7 +153,7 @@ impl Contract {
             token_id,
             &env::current_account_id(),
             0,
-            50_000_000_000_000
+            20_000_000_000_000
         ))
     }
 
@@ -164,10 +163,11 @@ impl Contract {
             Some(mut metadata) => {
                 let mut flanear_stats: FlanearStats = serde_json::from_str(&metadata.extra.unwrap()).unwrap();
 
-                flanear_stats.stamina = flanear_stats.stamina + 2 * flanear_stats.level;
-                flanear_stats.income = flanear_stats.income + 2 * flanear_stats.level;
-                flanear_stats.recovery = flanear_stats.recovery + 2 * flanear_stats.level;
-                flanear_stats.recovery = flanear_stats.level + 1;
+                flanear_stats.stamina = flanear_stats.stamina + 50 * flanear_stats.level;
+                flanear_stats.income = flanear_stats.income + 1;
+                flanear_stats.energy = flanear_stats.energy + 1;
+                flanear_stats.recovery = flanear_stats.recovery - 1;
+                flanear_stats.level = flanear_stats.level + 1;
 
                 metadata.extra = Option::from(serde_json::to_string(&flanear_stats).unwrap());
                 metadata
