@@ -7,6 +7,8 @@ use near_sdk::collections::LazyOption;
 use near_sdk::json_types::U128;
 use near_sdk::{env, log, near_bindgen, AccountId, Balance, PanicOnDefault, PromiseOrValue, require};
 
+const NFT_CONTRACT_ID: &str = "nft.flanear.testnet";
+
 #[near_bindgen]
 #[derive(BorshDeserialize, BorshSerialize, PanicOnDefault)]
 pub struct Contract {
@@ -53,28 +55,17 @@ impl Contract {
     }
 
     pub fn burn(&mut self, account_id: AccountId, amount: U128) {
-        assert_eq!(env::predecessor_account_id(), self.owner_id);
+        assert_eq!("nft.flanear.testnet", env::predecessor_account_id().as_str());
 
         require!(u128::from(amount) > 0, "The amount should be a positive number");
+        match self.token.accounts.get(&account_id) {
+            Some(account_id) => {},
+            None => {
+                self.token.internal_register_account(&account_id)
+            }
+        }
         self.token.internal_withdraw(&account_id, amount.into());
         self.on_tokens_burned(account_id, amount.into());
-    }
-
-    pub fn reward(&mut self, receiver_id: AccountId, amount: U128, memo: Option<String>) {
-        assert_eq!(env::predecessor_account_id(), self.owner_id);
-
-        match self.token.accounts.get(&self.owner_id) {
-            Some(balance) => {
-                if amount > U128(balance) {
-                    panic!("The account doesn't have enough balance");
-                }
-
-                let sender_id = env::predecessor_account_id();
-                let amount: Balance = amount.into();
-                self.token.internal_transfer(&sender_id, &receiver_id, amount, memo);
-            },
-            None => panic!("Contract not init")
-        };
     }
 
     fn on_account_closed(&mut self, account_id: AccountId, balance: Balance) {

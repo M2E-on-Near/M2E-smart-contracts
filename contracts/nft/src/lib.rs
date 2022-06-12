@@ -43,8 +43,8 @@ pub struct Contract {
     metadata: LazyOption<NFTContractMetadata>,
 }
 
-const FT1_CONTRACT_ID: &str = "krock.testnet";
-const FT2_CONTRACT_ID: &str = "krock.testnet";
+const FT1_CONTRACT_ID: &str = "krk.flanear.testnet";
+const FT2_CONTRACT_ID: &str = "flan.flanear.testnet";
 
 #[derive(BorshSerialize, BorshStorageKey)]
 enum StorageKey {
