@@ -96,12 +96,12 @@ impl Contract {
             token_id,
             &env::current_account_id(),
             0,
-            5_000_000_000_00
+            50_000_000_000_000
         ))
     }
 
     #[private]
-    fn on_ft1_balance_of(&self, account_id: AccountId, token_id: TokenId, #[callback] ft1_in_balance: U128) -> Promise {
+    pub fn on_ft1_balance_of(&self, account_id: AccountId, token_id: TokenId, #[callback] ft1_in_balance: U128) -> Promise {
         ext_ft_transfer::ft_balance_of(
             account_id.clone(),
             &FT2_CONTRACT_ID,
@@ -113,12 +113,12 @@ impl Contract {
             ft1_in_balance,
             &env::current_account_id(),
             0,
-            5_000_000_000_00
+            50_000_000_000_000
         ))
     }
 
     #[private]
-    fn on_ft2_balance_of(&self, account_id: AccountId, token_id: TokenId, ft1_in_balance: U128, #[callback] ft2_in_balance: U128) -> Promise {
+    pub fn on_ft2_balance_of(&self, account_id: AccountId, token_id: TokenId, ft1_in_balance: U128, #[callback] ft2_in_balance: U128) -> Promise {
         let level = match self.tokens.token_metadata_by_id.as_ref().unwrap().get(&token_id.clone()) {
             Some(metadata) => {
                 let flanear_stats: FlanearStats = serde_json::from_str(&metadata.extra.unwrap()).unwrap();
@@ -154,12 +154,12 @@ impl Contract {
             token_id,
             &env::current_account_id(),
             0,
-            50_000_000_000_00
+            50_000_000_000_000
         ))
     }
 
     #[private]
-    fn on_fts_burn(&mut self, token_id: TokenId) -> TokenMetadata {
+    pub fn on_fts_burn(&mut self, token_id: TokenId) -> TokenMetadata {
         let new_token_metadata = match self.tokens.token_metadata_by_id.as_ref().unwrap().get(&token_id.clone()) {
             Some(mut metadata) => {
                 let mut flanear_stats: FlanearStats = serde_json::from_str(&metadata.extra.unwrap()).unwrap();

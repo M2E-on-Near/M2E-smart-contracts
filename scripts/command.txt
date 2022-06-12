@@ -26,3 +26,5 @@ init nft
 //////////////////////
 
 near call krock-nft.testnet new '{"owner_id":"krock.testnet","metadata":{"spec": "nft-1.0.0", "name": "", "symbol": ""}}' --account-id krock-nft.testnet
+
+"{"extra":{"level":1,"stamina":45,"income":83,"recovery":23,"energy":65}}"
