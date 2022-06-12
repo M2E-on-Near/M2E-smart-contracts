@@ -13,9 +13,6 @@ members = [
     "contracts/ft1",
     "contracts/ft2",
     "contracts/nft",
-  "test-approval-receiver",
-  "test-token-receiver",
 ]
 exclude  = [
-  "integration-tests"
 ]

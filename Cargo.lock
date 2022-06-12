@@ -35,14 +35,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "approval-receiver"
-version = "0.0.1"
-dependencies = [
- "near-contract-standards 3.2.0",
- "near-sdk 3.1.0",
-]
-
-[[package]]
 name = "arrayref"
 version = "0.3.6"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1373,14 +1365,6 @@ checksum = "ca8a50ef2360fbd1eeb0ecd46795a87a19024eb4b53c5dc916ca1fd95fe62438"
 dependencies = [
  "libc",
  "winapi",
-]
-
-[[package]]
-name = "token-receiver"
-version = "0.0.1"
-dependencies = [
- "near-contract-standards 3.2.0",
- "near-sdk 3.1.0",
 ]
 
 [[package]]
