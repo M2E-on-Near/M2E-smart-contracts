@@ -130,11 +130,11 @@ impl Contract {
         let ft2_to_burn = 100000000 * level as u128;
 
         if ft1_to_burn > ft1_in_balance.into() {
-            panic!("Not enough ft1");
+            panic!("Not enough krk");
         }
 
         if ft2_to_burn > ft2_in_balance.into() {
-            panic!("Not enough ft2");
+            panic!("Not enough flan");
         }
 
         ext_ft_transfer::burn(

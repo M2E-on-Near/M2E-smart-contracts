@@ -10,8 +10,8 @@ overflow-checks = true
 [workspace]
 # remember to include a member for each contract
 members = [
-    "contracts/ft1",
-    "contracts/ft2",
+    "contracts/krk",
+    "contracts/flan",
     "contracts/nft",
 ]
 exclude  = [
