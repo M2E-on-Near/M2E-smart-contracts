@@ -166,7 +166,7 @@ impl Contract {
                 flanear_stats.stamina = flanear_stats.stamina + 50 * flanear_stats.level;
                 flanear_stats.income = flanear_stats.income + 1;
                 flanear_stats.energy = flanear_stats.energy + 1;
-                flanear_stats.recovery = flanear_stats.recovery - 1;
+                flanear_stats.recovery = flanear_stats.recovery;
                 flanear_stats.level = flanear_stats.level + 1;
 
                 metadata.extra = Option::from(serde_json::to_string(&flanear_stats).unwrap());
