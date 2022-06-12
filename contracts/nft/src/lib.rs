@@ -126,8 +126,8 @@ impl Contract {
             None => panic!("Extra not found")
         };
 
-        let ft1_to_burn = 7 * level as u128;
-        let ft2_to_burn = level as u128;
+        let ft1_to_burn = 700000000 * level as u128;
+        let ft2_to_burn = 100000000 * level as u128;
 
         if ft1_to_burn > ft1_in_balance.into() {
             panic!("Not enough ft1");
